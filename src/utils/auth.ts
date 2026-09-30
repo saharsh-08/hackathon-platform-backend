@@ -20,4 +20,8 @@ export const auth = betterAuth({
       },
     },
   },
+  session: {
+    expiresIn: 24 * 3600 * 30, // 30 days in seconds
+    updateAge: 24 * 3600, // 24 hours in seconds
+  },
 });
