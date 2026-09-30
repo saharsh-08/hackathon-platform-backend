@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { PrismaService } from "../database/prisma.service";
+import { PrismaService } from "../../database/prisma.service";
 import { UserSession } from "@thallesp/nestjs-better-auth";
 
 @Injectable()

@@ -19,6 +19,8 @@ model User {
   role          String    @default("PARTICIPANT")
   sessions      Session[]
   accounts      Account[]
+  hackathons    Hackathon[]
+  hackathonParticipants HackathonParticipant[]
 
   @@unique([email])
   @@map("user")
@@ -70,4 +72,34 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Hackathon {
+  id           String          @id @default(cuid())
+  name         String
+  startDate    DateTime
+  endDate      DateTime
+  description  String
+  isActive     Boolean         @default(false)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  authorId     String
+  author       User            @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  participants HackathonParticipant[]
+
+  @@index([authorId])
+  @@map("hackathon")
+}
+
+model HackathonParticipant {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  userId      String
+  hackathonId String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hackathon   Hackathon @relation(fields: [hackathonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, hackathonId])
+  @@map("hackathon_participant")
 }

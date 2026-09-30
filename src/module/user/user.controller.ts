@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { Roles, Session, type UserSession } from "@thallesp/nestjs-better-auth";
-import { ResponseMessage } from "../common/decorators/response-message.decorator";
+import { ResponseMessage } from "../../common/decorators/response-message.decorator";
 
 @Controller("user")
 export class UserController {
